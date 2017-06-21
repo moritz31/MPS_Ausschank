@@ -8,7 +8,7 @@ OBJS := $(addprefix $(OBJDIR)/, $(CFILES:.c=.o))
 # Includedatei
 INCLUDE = -I ../h -I include
 # Toolchain
-TOOLCHAIN = arm-elf-
+TOOLCHAIN = arm-eb63-elf-
 # Compiler
 COMPILER = gcc
 # Linker/Binder
@@ -29,7 +29,7 @@ all: $(OBJS)
 	$(TOOLCHAIN)$(COMPILER) -c -g -O$(OPTI) ../boot/boot_ice.S -o $(OBJDIR)/boot_ice.o $(INCLUDE)
 	
 # Binden fuer die RAM-Version 
-	$(TOOLCHAIN)$(LINKER) -Ttext 0x02000000 -O$(OPTI) $(OBJDIR)/boot_ice.o $(OBJDIR)/swi.o $(OBJS) -o $(OUTPUT).elf
+	$(TOOLCHAIN)$(LINKER) -Ttext 0x02000000 -O$(OPTI) $(OBJDIR)/boot_ice.o $(OBJDIR)/swi.o $(OBJS) -o $(OUTPUT).elf /opt/arm-eb63-elf/lib/gcc/arm-eb63-elf/4.4.6/libgcc.a
 
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
