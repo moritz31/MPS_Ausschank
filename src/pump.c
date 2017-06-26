@@ -5,11 +5,13 @@
 #include "io.h"  // IO --> with user defined function
 #include "aic.h"
 
+int pumpState = 0;
+
 ///
 ///
 ///
 ///
-void init_pump( void )
+void init_pump(void)
 {
     StructTC *timerbase3 = TCB3_BASE; // Baseadresse TC Block1
     StructPIO *piobaseA = PIOA_BASE;  // Baseadresse PIO B
@@ -29,24 +31,26 @@ void init_pump( void )
     piobaseA->PIO_PER = (1 << PIOTIOA3); // Keep safe from permanent high
 }
 
-void switchPump( void )
+///
+///
+///
+void enablePump(void)
 {
-    StructTC *timerbase3 = TCB3_BASE; // Baseadresse Timer
-    StructPIO *piobaseB = PIOB_BASE;  // Baseadresse PIOB
     StructPIO *piobaseA = PIOA_BASE;
-    StructAIC *aicbase = AIC_BASE; // Baseadresse IRQController
+    StructTC *timerbase3 = TCB3_BASE;
 
-    // If Key1 is pressed
-    if (getInput(piobaseB, KEY1))
-    {
-        piobaseA->PIO_PER = (1 << PIOTIOA3); // Keep safe from permanent high signal
-        timerbase3->TC_CCR = TC_CLKDIS;
-    }
-    else if (getInput(piobaseB, KEY2)) // If Key2 is pressed enable pump
-    { 
-        timerbase3->TC_CCR = TC_CLKEN | TC_SWTRG;
-        piobaseA->PIO_PDR = (1 << PIOTIOA3); // Enable pump by disable IO Control
-    }
+    timerbase3->TC_CCR = TC_CLKEN | TC_SWTRG;
+    piobaseA->PIO_PDR = (1 << PIOTIOA3); // Enable pump by disable IO Control
+}
 
-    aicbase->AIC_EOICR = piobaseB->PIO_ISR; // End of Interrupt
+///
+///
+///
+void disablePump(void)
+{
+    StructPIO *piobaseA = PIOA_BASE;
+    StructTC *timerbase3 = TCB3_BASE;
+
+    piobaseA->PIO_PER = (1 << PIOTIOA3); // Keep safe from permanent high signal
+    timerbase3->TC_CCR = TC_CLKDIS;
 }

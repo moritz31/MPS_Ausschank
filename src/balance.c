@@ -1,5 +1,7 @@
 #include "balance.h"
 
+#include "global_config.h"
+
 #include "pio.h"
 #include "pmc.h"
 #include "tc.h"
@@ -79,7 +81,7 @@ int measure(void)
     period2 = captureRB - captureRA; // Difference between RA(RISING) RB(RISING)
 
     // Calculate weight and return it
-    return calculateMass(0, 2000, period1, period2);
+    return calculateMass(BALANCE_C1, BALANCE_C2, period1, period2);
 }
 
 ///

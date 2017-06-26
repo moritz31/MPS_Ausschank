@@ -12,14 +12,16 @@
 #include "../h/pio.h"
 #include "../h/usart.h"
 
+#include "global_config.h"
+
 int init_ser(void);
 char putch(char);
 char getch(void);
 
-#define 	DEFAULT_BAUD 38400
+#define 	DEFAULT_BAUD TARGET_BAUD
 #define 	CLOCK_SPEED 25000000
 //US_BAUD =  (CLOCK_SPEED / (16*(DEFAULT_BAUD))	// 25MHz / ( 16 * 38400) = 40.69  -> 41 -> 0x29
-#define 	US_BAUD 0x29
+#define 	US_BAUD (CLOCK_SPEED / (16*(DEFAULT_BAUD)))
 
 // Initialisiert die serielle Schnittstelle USART0
 

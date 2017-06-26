@@ -5,7 +5,13 @@
 void init_pump( void );
 
 /**
- * @brief
+ * @brief Enables the pump
  * @author Moritz Weichert, Phil Goeritz
  */
-void switchPump( void );
+void enablePump( void );
+
+/**
+ * @brief Disables the pump
+ * @author Moritz Weichert, Phil Goeritz
+ */
+void disablePump( void );

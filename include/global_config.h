@@ -1,3 +1,5 @@
 
-
 #define TARGET_WEIGHT 100
+#define BALANCE_C1 0
+#define BALANCE_C2 2000
+#define TARGET_BAUD 38400
