@@ -1,6 +1,8 @@
 #include "io.h"
 #include "pmc.h"
 
+#define PMC_PCER_PIOB  (1<<13)
+
 /// This function returns 0 if the specific value in the PIO_PDSR register is set.
 /// Since the board is active low, this means, that if we have an low pegel (0) on the pin we have an active input
 /// otherwise it is inactive (1)

@@ -19,7 +19,7 @@ int measure( void );
  * @param c1 Specific calibrationvalue of the balance which need to be adjust
  * @param c2 Specific calibrationvalue of the balance which need to be adjust
  * @param p1 Period1 from the balance
- * @param p2 Period2 fro mthe balance
+ * @param p2 Period2 from the balance
  * @return The mass of the object in g
  */
-int calculateMass(int c1, int c2, int p1, int p2);
+int calculateMass(int c1, int c2, float p1, float p2);

@@ -75,7 +75,7 @@ int measure(void)
 
     /* !!! BUSY WAITING !!! */
     while (!(tcbase5->TC_SR & 0x40))
-        ; // Capture Regier B was loaded
+        ; // Capture Register B was loaded
     captureRA = tcbase5->TC_RA;
     captureRB = tcbase5->TC_RB;
     period2 = captureRB - captureRA; // Difference between RA(RISING) RB(RISING)
@@ -88,7 +88,7 @@ int measure(void)
 ///
 ///
 ///
-int calculateMass(int c1 ,int c2, int p1, int p2) {
+int calculateMass(int c1 ,int c2, float p1, float p2) {
     //Calculate weight m = C1 * ((TIOA4/TIOA5) - 1) - C2 
-    return c2 * ((p1/p2) -1) - c1;
+    return c1 * ((p1/p2) -1) - c2;
 }
